@@ -1,6 +1,19 @@
 .product-card{
    border-bottom: 1px solid gray;
-  margin-bottom : 20px;
-  padding: 10px;
- display: flex;
+   margin-bottom : 20px;
+   margin-right: 5px;
+   padding: 10px;
+   display: flex;
+}
+.product-name{
+    color: rgb(63, 50, 50);
+    font-weight: 400;
+}
+.btn-style{
+   background-color: goldenrod;
+   width: 150px;
+   height: 30px;
+   border: 1px solid gray;
+   border-radius: 5px;
+   cursor: pointer;
 }
