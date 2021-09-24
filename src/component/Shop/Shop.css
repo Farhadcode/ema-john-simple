@@ -2,6 +2,17 @@
     display: grid;
     grid-template-columns: 3fr 1fr;
 }
+
+.search-container{
+    background-color: rgb(12, 12, 12);
+    text-align: center;
+    padding: 15px;
+}
+.search-container input{
+    width: 75%;
+    height: 30px;   
+
+}
 .product-container{
     border-right: 1px solid rgb(201, 212, 211);
     margin-left: 15%;

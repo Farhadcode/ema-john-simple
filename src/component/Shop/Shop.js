@@ -6,6 +6,7 @@ import './Shop.css'
 const Shop = () => {
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
+    const [displayProducts, setDisplayProducts] = useState([]);
 
     useEffect(() => {
         //console.log('just call');
@@ -13,6 +14,7 @@ const Shop = () => {
             .then(res => res.json())
             .then(data => {
                 setProducts(data);
+                setDisplayProducts(data);
                 //console.log('call received');
             })
     }, [])
@@ -27,8 +29,12 @@ const Shop = () => {
             for (const key in savedCart) {
                 // console.log(key, savedCart[key]);
                 const addedProduct = products.find(product => product.key === key);
-                // console.log(key, addedProduct);
-                storedCart.push(addedProduct)
+                if (addedProduct) {
+                    const quantity = savedCart[key];
+                    addedProduct.quantity = quantity;
+                    //console.log(addedProduct);
+                    storedCart.push(addedProduct);
+                }
             }
             setCart(storedCart);
         }
@@ -44,24 +50,43 @@ const Shop = () => {
         // save to local storag
         addToDb(product.key)
     }
+
+    const handelSearch = event => {
+        const searchText = event.target.value;
+        const matchedProducts = products.filter(product => product.name.toLowerCase().includes(searchText.toLowerCase()));
+        setDisplayProducts(matchedProducts);
+        console.log(matchedProducts.length);
+
+    }
     return (
-        <div>
-            <div className="shop-container">
-                <div className="product-container">
-                    {
-                        products.map(pd => <Product
-                            key={pd.key}
-                            product={pd}
-                            handleAddToCart={handleAddToCart}>
-                        </Product>)
-                    }
-                </div>
-                <div className="cart-container">
-                    <Cart cart={cart}></Cart>
-                </div>
+        <>
+            <div className="search-container">
+                <input
+                    onChange={handelSearch}
+                    type="text"
+                    placeholder="Search Product" />
 
             </div>
-        </div>
+            <div>
+                <div className="shop-container">
+                    <div className="product-container">
+                        {
+                            // products.map(pd => <Product
+                            displayProducts.map(pd => <Product
+                                key={pd.key}
+                                product={pd}
+                                handleAddToCart={handleAddToCart}>
+                            </Product>)
+                        }
+                    </div>
+                    <div className="cart-container">
+                        <Cart cart={cart}></Cart>
+                    </div>
+
+                </div>
+            </div>
+
+        </>
     );
 };
 
