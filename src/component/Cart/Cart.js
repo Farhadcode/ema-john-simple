@@ -18,7 +18,7 @@ const Cart = (props) => {
     // console.log(totalQuantity);
 
     // const total = cart.reduce((previous, product) => previous + product.price, 0);
-    const shipping = 15;
+    const shipping = total > 0 ? 15 : 0;
     const tax = (total + shipping) / 10;
     const grandTotal = total + shipping + tax;
     return (
