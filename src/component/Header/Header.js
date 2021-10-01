@@ -6,7 +6,7 @@ const Header = () => {
         <div className="header">
             <img className="logo" src={logo} alt="" />
             <nav><a href="/shop">Shop</a>
-                <a href="/orders">Order Review</a>
+                <a href="/review">Order Review</a>
                 <a href="/inventory">Manage Inventory here</a></nav>
         </div>
     );

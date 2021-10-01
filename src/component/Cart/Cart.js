@@ -4,7 +4,7 @@ const Cart = (props) => {
     // console.log(props.cart);
     const { cart } = props;
 
-    //console.log(cart);
+    console.log(cart);
     let totalQuantity = 0;
     let total = 0;
     for (const product of cart) {
