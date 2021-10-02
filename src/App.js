@@ -8,6 +8,7 @@ import Shop from './component/Shop/Shop';
 import OrderReview from './component/OrderReview/OrderReview';
 import Inventory from './component/Inventory/Inventory';
 import NotFound from './component/NotFound/NotFound';
+import PlaceOrder from './component/PlaceOrder/PlaceOrder';
 
 
 function App() {
@@ -26,6 +27,9 @@ function App() {
         </Route>
         <Route exact path="/inventory">
           <Inventory></Inventory>
+        </Route>
+        <Route exact path="/placeorder">
+          <PlaceOrder></PlaceOrder>
         </Route>
         <Route path="*">
           <NotFound></NotFound>
