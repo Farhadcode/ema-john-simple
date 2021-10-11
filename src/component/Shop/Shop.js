@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { addToDb, getStoredCart } from '../../utilities/fakedb';
+import { addToDb, getStoredCard } from '../../utilities/NewFakedb';
+
 import Cart from '../Cart/Cart';
+import useCart from '../hooks/useCart';
 
 import Product from '../Product/Product';
 import './Shop.css'
 
 
 const Shop = () => {
+
     const [products, setProducts] = useState([]);
-    const [cart, setCart] = useState([]);
+    const [cart, setCart] = useCart(products);
+
+    // products to be rendered on the UI
     const [displayProducts, setDisplayProducts] = useState([]);
 
     useEffect(() => {
@@ -28,7 +33,7 @@ const Shop = () => {
         //console.log('LS call');
 
         if (products.length) {
-            const savedCart = getStoredCart();
+            const savedCart = getStoredCard();
             const storedCart = [];
             for (const key in savedCart) {
                 // console.log(key, savedCart[key]);
@@ -52,7 +57,7 @@ const Shop = () => {
         if (exists) {
             const rest = cart.filter(pd => pd.key !== product.key);
             exists.quantity += 1;
-            newCart = [...rest, product];
+            newCart = [...rest, exists];
         }
         else {
             product.quantity = 1;
