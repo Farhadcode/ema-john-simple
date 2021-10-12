@@ -19,7 +19,7 @@ const Shop = () => {
 
     useEffect(() => {
         //console.log('just call');
-        fetch('./products.JSON')
+        fetch('./products.json')
             .then(res => res.json())
             .then(data => {
                 setProducts(data);
