@@ -21,3 +21,14 @@
 .cart-container{
     margin-left: 5%;
 }
+.pagination{
+    margin: 30px;
+}
+.pagination button{
+    padding: 0 10px;
+    margin-right: 20px;
+}
+.pagination .selected{
+    background-color: rgba(7, 118, 245, 0.931)  ;
+    color: white;
+}
