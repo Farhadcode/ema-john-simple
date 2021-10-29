@@ -8,7 +8,7 @@ const useCart = () => {
 
     useEffect(() => {
         const savedCart = getStoredCard();
-        // console.log(savedCart);
+        //console.log(savedCart);
         const keys = Object.keys(savedCart);
 
         fetch('http://localhost:5000/products/byKeys', {

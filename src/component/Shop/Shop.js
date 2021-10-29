@@ -14,7 +14,7 @@ import './Shop.css'
 const Shop = () => {
 
     const [products, setProducts] = useState([]);
-    const [cart, setCart] = useCart(products);
+    const [cart, setCart] = useCart();
     const [page, setPage] = useState(0);
     const [pageCount, setPageCount] = useState(0);
 
@@ -53,7 +53,7 @@ const Shop = () => {
                     storedCart.push(addedProduct);
                 }
             }
-            setCart(storedCart);
+            //setCart(storedCart);
         }
 
         //console.log(savedCart);
