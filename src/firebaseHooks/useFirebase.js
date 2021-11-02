@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, getIdToken } from "firebase/auth";
 import { useEffect } from 'react';
 import initializeAuthentication from './../Firebase/firebase.init';
 
@@ -8,6 +8,7 @@ initializeAuthentication();
 const useFirebase = () => {
 
     const [user, setUser] = useState({});
+    const [loading, setLoaging] = useState(true);
 
     const auth = getAuth();
     const googleProviider = new GoogleAuthProvider();
@@ -16,6 +17,8 @@ const useFirebase = () => {
 
     const signInUsingGoogle = () => {
         return signInWithPopup(auth, googleProviider)
+
+            .finally(() => { setLoaging(false) });
         // .then(result => {
         //     const user = result.user;
         //     console.log(user);
@@ -28,24 +31,31 @@ const useFirebase = () => {
             .then(() => {
                 setUser({});
             })
+            .finally(() => setLoaging(false))
     }
 
-    // fireBase ovbservser system
+    //e obsere system whene user auth state changed or not
 
     useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
+                getIdToken(user)
+                    .then(idToken => localStorage.setItem("idToken", idToken));
                 setUser(user);
             }
-
+            else {
+                setUser({});
+            }
+            setLoaging(false);
         });
-
+        return () => unsubscribe;
     }, [])
 
     return {
         user,
         signInUsingGoogle,
         logOut,
+        loading
     }
 
 }
